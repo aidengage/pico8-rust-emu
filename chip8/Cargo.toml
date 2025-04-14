@@ -1,9 +1,5 @@
-[workspace]
-
-members = ["chip8", "sdl"]
-
 [package]
-name = "pico8-emu"
+name = "chip8"
 version = "0.1.0"
 edition = "2024"
 
