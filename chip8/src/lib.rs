@@ -6,6 +6,31 @@ pub const SCREEN_HEIGHT: usize = 32;
 const MEM_SIZE: usize = 0x1000;
 const ROM_ADDR: usize = 0x200;
 
+#[derive(Clone, Copy)]
+struct Reg(u8);
+
+struct Regs([u8; 0x10]);
+
+impl Regs {
+    fn new() -> Self {
+        Self([0; 0x10])
+    }
+}
+
+impl Index<Reg> for Regs {
+    type Output = u8;
+
+    fn index(&self, reg: Reg) -> Self::Output {
+        self.0[reg.0 as usize]
+    }
+}
+
+impl IndexMut<Reg> for Regs {
+    fn index_mut(&mut self, reg: Reg) -> &mut Self::Output {
+        &mut self.0[reg.0 as usize]
+    }
+}
+
 pub struct Chip8<R: RngCore> {
     mem: [u8; MEM_SIZE],
     v: Regs,
@@ -30,6 +55,8 @@ fn op_add(&mut self, x: Reg, b: u8) -> usize {
     self.pc += 2;
     45
 }
+
+fn op_sub(&mut self, x: Reg, )
 
 fn main() {
     println!("Hello, world!");
